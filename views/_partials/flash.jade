@@ -1,0 +1,6 @@
+if messages.errors
+  .alert.alert-danger.fade.in
+    button.close(type='button', data-dismiss='alert')
+      | &times;
+    for error in messages.errors
+      div= error.msg

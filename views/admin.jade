@@ -1,0 +1,34 @@
+extends /_layout
+
+block content
+  .container
+    h1 Admin
+    #adminApp
+      p Game Pin: {{ gamePin }}
+      p {{ connections }} connections
+      button.btn.btn-primary(
+        v-if="this.state === 'LOBBY'"
+        v-on:click="start"
+      ) Start
+      button.btn.btn-primary(
+        v-if="this.state === 'SHOW'"
+        v-on:click="newElement"
+      ) New Element
+      button.btn.btn-primary(
+        v-if="this.state === 'GAME'"
+        v-on:click="show"
+      ) Show Element Name
+      button.btn.btn-danger(
+        v-if="this.state === 'SHOW'"
+        v-on:click="end"
+      ) End
+      br
+      p {{ element.atomicNumber }}
+      p {{ element.name }}
+      p {{ element.symbol }}
+
+block scripts
+  script.
+    const sessionID = #{sessionID};
+    const gamePin = #{gamePin};
+  script(src="/js/admin.js")

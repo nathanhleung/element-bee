@@ -1,0 +1,28 @@
+extends /_layout
+
+block content
+  .container
+    h1 Home
+    #homeApp
+      .row
+        .col-sm-6
+          form(v-on:submit.prevent='goToGame')
+            .form-group
+              label Game Pin
+              input.form-control(type='text' v-model='gamePin')
+            button.btn.btn-primary(type='submit') Go
+
+block scripts
+  script.
+    const vm = new Vue({
+      el: '#homeApp',
+      data: {
+        gamePin: '',
+      },
+      methods: {
+        goToGame() {
+          window.location.href = `/game/${this.gamePin}`;
+        }
+      }
+    });
+    
