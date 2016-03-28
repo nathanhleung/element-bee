@@ -32,3 +32,8 @@ socket.on('end', function () {
   vm.message = 'Next match starting soon';
   vm.element = {};
 });
+
+socket.on('delete', function () {
+  vm.state = 'DELETED';
+  vm.message = 'The game has expired. Please return to the lobby.';
+});

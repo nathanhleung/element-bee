@@ -1,12 +1,8 @@
 const pt = require('periodic-table');
+const Game = require('../models/Game');
 
 exports.disconnect = (data, socket, io) => {
   io.emit('connection-update', io.engine.clientsCount);
-};
-
-exports.newAdmin = (gamePin, socket, io) => {
-  
-  
 };
 
 exports.start = (data, socket, io) => {
@@ -29,8 +25,11 @@ exports.end = (data, socket, io) => {
   io.emit('end');
 };
 
-exports.adminDisconnect = (gamePin, socket, io) => {
-  
+exports.delete = (gamePin, socket, io) => {
+  Game.findById(gamePin).remove((err) => {
+    // how to error handle?
+  });
+  io.emit('delete');
 };
 
 module.exports = exports;

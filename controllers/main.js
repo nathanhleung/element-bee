@@ -8,7 +8,7 @@ exports.home = (req, res) => {
   });
 };
 
-exports.game = (req, res) => {
+exports.play = (req, res) => {
   if (!req.params.gamePin) {
     req.flash('errors', {
       msg: 'Invalid game PIN',
@@ -20,17 +20,31 @@ exports.game = (req, res) => {
   });
 }
 
-exports.admin = (req, res) => {
+exports.newGame = (req, res) => {
   const game = new Game({
-    creator: req.sessionID
+    creator: req.sessionID,
   });
   game.save((err, newGame) => {
+    if (err) {
+      return res.send(err);
+    }
+    res.redirect(`/game/${newGame.id}`);
+  })
+};
+
+exports.admin = (req, res) => {
+  Game.findById(req.params.gamePin, (err, game) => {
+    if (err) {
+      return res.send(err);
+    }
+    if (game && req.sessionID !== game.creator) {
+      return res.sendStatus(403);
+    }
     res.render('admin', {
       title: 'Admin',
-      sessionID: req.sessionID,
-      gamePin: newGame.id
+      sessionID: req.sessionID
     });
-  })
+  });
 };
 
 exports.element = (req, res) => {

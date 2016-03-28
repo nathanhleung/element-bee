@@ -30,3 +30,8 @@ socket.on('end', () => {
   vm.message = 'Next match starting soon'
   vm.element = {};
 });
+
+socket.on('delete', () => {
+  vm.state = 'DELETED';
+  vm.message = 'The game has expired. Please return to the lobby.';
+});

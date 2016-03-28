@@ -3,9 +3,11 @@ extends /_layout
 block content
   .container
     h1 Admin
+    p Please do not clear your cookies to keep access
     #adminApp
       p Game Pin: {{ gamePin }}
       p {{ connections }} connections
+      p(v-if="this.state === 'DELETED'") Your game has expired. Please return to the homepage.
       button.btn.btn-primary(
         v-if="this.state === 'LOBBY'"
         v-on:click="start"
@@ -28,7 +30,4 @@ block content
       p {{ element.symbol }}
 
 block scripts
-  script.
-    const sessionID = #{sessionID};
-    const gamePin = #{gamePin};
   script(src="/js/admin.js")

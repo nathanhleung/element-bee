@@ -42,8 +42,9 @@ app.use((req, res, next) => {
 });
 
 app.get('/', mainCtrl.home);
-app.get('/game/:gamePin', mainCtrl.game)
-app.get('/admin', mainCtrl.admin);
+app.get('/play/:gamePin', mainCtrl.play)
+app.get('/game/new', mainCtrl.newGame);
+app.get('/game/:gamePin', mainCtrl.admin);
 // Public elements API - easier to just require into sockets.js though
 app.get('/elements/:n', mainCtrl.element);
 

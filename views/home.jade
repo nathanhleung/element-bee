@@ -6,11 +6,15 @@ block content
     #homeApp
       .row
         .col-sm-6
+          h2 Play
           form(v-on:submit.prevent='goToGame')
             .form-group
               label Game Pin
               input.form-control(type='text' v-model='gamePin')
             button.btn.btn-primary(type='submit') Go
+        .col-sm-6
+          h2 New Game
+          button.btn.btn-primary(type='button' v-on:click='newGame') New Game
 
 block scripts
   script.
@@ -20,9 +24,12 @@ block scripts
         gamePin: '',
       },
       methods: {
+        newGame() {
+          window.location.href = '/game/new';
+        },
         goToGame() {
-          window.location.href = `/game/${this.gamePin}`;
-        }
+          window.location.href = `/play/${this.gamePin}`;
+        },
       }
     });
     

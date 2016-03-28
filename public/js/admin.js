@@ -4,7 +4,8 @@
 
 var socket = io();
 
-socket.emit('new-admin', gamePin);
+var url = window.location.href;
+var gamePin = url.substr(url.lastIndexOf('/') + 1);
 
 var vm = new Vue({
   el: '#adminApp',
@@ -17,13 +18,11 @@ var vm = new Vue({
   methods: {
     start: function start() {
       socket.emit('start');
-      this.state = 'GAME';
     },
 
     // Show element name
     show: function show() {
       socket.emit('show');
-      this.state = 'SHOW';
     },
 
     // Request element
@@ -31,11 +30,12 @@ var vm = new Vue({
     // so we can't use it
     newElement: function newElement() {
       socket.emit('newElement');
-      this.state = 'GAME';
     },
     end: function end() {
       socket.emit('end');
-      this.state = 'LOBBY';
+    },
+    delete: function _delete() {
+      socket.emit('delete');
     }
   }
 });
@@ -46,16 +46,23 @@ socket.on('connection-update', function (count) {
 
 // The start event returns an element
 socket.on('start', function (element) {
+  undefined.state = 'GAME';
   vm.element = element;
+});
+
+socket.on('show', function () {
+  undefined.state = 'SHOW';
+});
+
+socket.on('end', function () {
+  undefined.state = 'LOBBY';
 });
 
 socket.on('newElement', function (element) {
+  undefined.state = 'GAME';
   vm.element = element;
 });
 
-window.addEventListener('unload', function () {
-  socket.emit('admin-disconnect', {
-    gamePin: gamePin,
-    sessionID: sessionID
-  });
+socket.on('delete', function () {
+  vm.state = 'DELETED';
 });

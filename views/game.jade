@@ -5,6 +5,7 @@ block content
     h1 Element Bee
     #elementApp
       p(v-if="this.state === 'LOBBY'") {{ message }}
+      p(v-if="this.state === 'DELETED'") {{ message }}
       h1(v-if="this.state === 'GAME'") {{ element.symbol }}
       div(v-if="this.state === 'SHOW'")
         p {{ element.atomicNumber }}
