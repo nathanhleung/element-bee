@@ -3,6 +3,12 @@ const Game = require('../models/Game');
 const moment = require('moment');
 
 exports.connection = (socket, io) => {
+  const url = socket.handshake.headers.referer;
+  const gamePin = url.substr(url.lastIndexOf('/') + 1);
+  socket.join(gamePin);
+  
+  console.log(socket.rooms);
+  
   io.emit('connection-update', io.engine.clientsCount);
   
   // Clear DB once every hour of everything created an hour ago or before
@@ -10,8 +16,8 @@ exports.connection = (socket, io) => {
     Game.find({
       created: {
         $lte: moment().subtract(1, 'hours')
-      }
-    })
+      },
+    });
   }, 1000 * 60 * 60);
   
   socket.on('disconnect', (data) => {
