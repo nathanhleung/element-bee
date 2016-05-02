@@ -25,9 +25,10 @@ app.use((req, res, next) => {
 });
 
 app.get('/', mainCtrl.game);
-
+/* example credentials
 process.env.ADMIN_NAME = 'me';
 process.env.ADMIN_PASS = 'me123';
+*/
 app.get('/admin', mainCtrl.admin);
 
 app.get('*', mainCtrl.notFound);
