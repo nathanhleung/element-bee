@@ -1,15 +1,19 @@
 extends /_layout
 
 block content
-  .container
-    h1 Element Bee
-    #elementApp
-      p(v-if="this.state === 'LOBBY'") {{ message }}
-      h1(v-if="this.state === 'GAME'") {{ element.symbol }}
-      div(v-if="this.state === 'SHOW'")
-        p {{ element.atomicNumber }}
-        p {{ element.name }}
-        p {{ element.symbol }}
-    
+  .jumbotron.jumbotron-full
+    .container
+      #elementApp
+        h1#main-header(v-bind:class=`{
+          'in-game': this.state !== 'LOBBY'
+        }`) Element Bee
+        p(v-if="this.state === 'LOBBY'") {{ message }}
+        .flex-center
+          h1#element(v-if="this.state === 'GAME'") {{ element.symbol }}
+          #element-info(v-if="this.state === 'SHOW'")
+            p {{ element.atomicNumber }}
+            p {{ element.name }}
+            p {{ element.symbol }}
+      
 block scripts
-  script(src='/js/home.js')
+  script(src='/js/game.js')

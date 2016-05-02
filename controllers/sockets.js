@@ -3,10 +3,6 @@ const socketCtrl = require('../controllers/socket');
 exports.connection = (socket, io) => {
   io.emit('connection-update', io.engine.clientsCount);
   
-  socket.on('new-admin', (gamePin) => {
-    socketCtrl.newAdmin(gamePin, socket, io);
-  });
-  
   socket.on('disconnect', (data) => {
     socketCtrl.disconnect(data, socket, io);
   });
@@ -25,10 +21,6 @@ exports.connection = (socket, io) => {
   
   socket.on('end', (data) => {
     socketCtrl.end(data, socket, io);
-  });
-  
-  socket.on('admin-disconnect', (gamePin) => {
-    socketCtrl.adminDisconnect(gamePin, socket, io);
   });
 };
 

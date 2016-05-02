@@ -1,8 +1,6 @@
-/* global io Vue sessionID gamePin */
+/* global io Vue sessionID */
 
 const socket = io();
-
-socket.emit('new-admin', gamePin);
 
 const vm = new Vue({
   el: '#adminApp',
@@ -10,7 +8,6 @@ const vm = new Vue({
     state: 'LOBBY',
     element: {},
     connections: 0,
-    gamePin,
   },
   methods: {
     start() {
@@ -32,7 +29,8 @@ const vm = new Vue({
     end() {
       socket.emit('end');
       this.state = 'LOBBY';
-    },
+      this.element = {};
+    }
   },
 });
 
@@ -47,11 +45,4 @@ socket.on('start', (element) => {
 
 socket.on('newElement', (element) => {
   vm.element = element;
-});
-
-window.addEventListener('unload', () => {
-  socket.emit('admin-disconnect', {
-    gamePin,
-    sessionID,
-  });
 });

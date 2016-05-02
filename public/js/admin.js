@@ -1,18 +1,15 @@
 'use strict';
 
-/* global io Vue sessionID gamePin */
+/* global io Vue sessionID */
 
 var socket = io();
-
-socket.emit('new-admin', gamePin);
 
 var vm = new Vue({
   el: '#adminApp',
   data: {
     state: 'LOBBY',
     element: {},
-    connections: 0,
-    gamePin: gamePin
+    connections: 0
   },
   methods: {
     start: function start() {
@@ -36,6 +33,7 @@ var vm = new Vue({
     end: function end() {
       socket.emit('end');
       this.state = 'LOBBY';
+      this.element = {};
     }
   }
 });
@@ -51,11 +49,4 @@ socket.on('start', function (element) {
 
 socket.on('newElement', function (element) {
   vm.element = element;
-});
-
-window.addEventListener('unload', function () {
-  socket.emit('admin-disconnect', {
-    gamePin: gamePin,
-    sessionID: sessionID
-  });
 });

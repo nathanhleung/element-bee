@@ -1,34 +1,35 @@
 extends /_layout
 
 block content
-  .container
-    h1 Admin
-    #adminApp
-      p Game Pin: {{ gamePin }}
-      p {{ connections }} connections
-      button.btn.btn-primary(
-        v-if="this.state === 'LOBBY'"
-        v-on:click="start"
-      ) Start
-      button.btn.btn-primary(
-        v-if="this.state === 'SHOW'"
-        v-on:click="newElement"
-      ) New Element
-      button.btn.btn-primary(
-        v-if="this.state === 'GAME'"
-        v-on:click="show"
-      ) Show Element Name
-      button.btn.btn-danger(
-        v-if="this.state === 'SHOW'"
-        v-on:click="end"
-      ) End
-      br
-      p {{ element.atomicNumber }}
-      p {{ element.name }}
-      p {{ element.symbol }}
+  .jumbotron.jumbotron-full
+    .container
+      h1 Admin
+      #adminApp
+        p {{ connections }} connections
+        .row
+          .col-sm-3
+            button.btn.btn-success.btn-block.btn-lg(
+              v-if="this.state === 'LOBBY'"
+              v-on:click="start"
+            ) Start
+            button.btn.btn-primary.btn-block.btn-lg(
+              v-if="this.state === 'SHOW'"
+              v-on:click="newElement"
+            ) New Element
+            button.btn.btn-info.btn-block.btn-lg(
+              v-if="this.state === 'GAME'"
+              v-on:click="show"
+            ) Show Element Name
+            button.btn.btn-danger.btn-block.btn-lg(
+              v-on:click="end"
+            ) Reset
+            br
+            .text-center(v-if="this.state === 'GAME'")
+              h2 {{ element.name }}, {{ element.symbol }}
+            .text-center(v-if="this.state === 'SHOW'")
+              p {{ element.atomicNumber }}
+              p {{ element.name }}
+              p {{ element.symbol }}
 
 block scripts
-  script.
-    const sessionID = #{sessionID};
-    const gamePin = #{gamePin};
   script(src="/js/admin.js")

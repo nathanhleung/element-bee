@@ -1,0 +1,50 @@
+@import url(https://fonts.googleapis.com/css?family=Playfair+Display:900italic);
+@import url(https://fonts.googleapis.com/css?family=Josefin+Sans);
+
+body {
+  font-family: 'Josefin Sans';
+}
+
+h1 {
+  font-family: 'Playfair Display';
+  font-weight: 900;
+  font-style: italic;
+}
+
+.jumbotron.jumbotron-full {
+  min-height: 100vh;
+  margin-bottom: 0;
+}
+
+.flex-center {
+  min-height: 50vh;
+  min-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#element {
+  display: block;
+  font-size: 15rem;
+}
+
+#element-info {
+  text-align: center;
+  
+  p {
+    font-size: 4rem;
+  }
+}
+
+#main-header {
+  transition: all 0.3s;
+  
+  &.in-game {
+    font-size: 2rem;
+  }
+}
+
+.btn {
+  border-radius: 0;
+}
