@@ -10,6 +10,7 @@ block content
         p(v-if="this.state === 'LOBBY'") {{ message }}
         .flex-center
           h1#element(v-if="this.state === 'GAME'") {{ element.symbol }}
+          p#element-sans ({{ element.symbol }})
           #element-info(v-if="this.state === 'SHOW'")
             p {{ element.atomicNumber }}
             p {{ element.name }}
