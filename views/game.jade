@@ -12,7 +12,7 @@ block content
           div(v-if="this.state === 'GAME'")
             h1#element {{ element.symbol }}
             br
-            p#element-sans ({{ element.symbol }})
+            h2.text-center {{ element.symbol }}
           #element-info(v-if="this.state === 'SHOW'")
             p {{ element.atomicNumber }}
             p {{ element.name }}
