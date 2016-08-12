@@ -1,5 +1,13 @@
 # Element Bee
-Node.js/Express/Socket.io app for element bees
+Node.js/Express/Socket.io app for element bees (best setup is "Extended" mode with a SMARTBoard, with admin panel on laptop and game screen on the board).
+
+## Client Views
+<img src="https://i.imgur.com/0WjGxYb.png?1" width="500">
+<img src="https://i.imgur.com/a1zd0hQ.png?1" width="500">
+
+## Admin Views
+<img src="https://i.imgur.com/n8i9EuM.png?1" width="500">
+<img src="https://i.imgur.com/PYj86I6.png?1" width="500">
 
 ## Setup
 1. Run `gulp` to build frontend assets.
